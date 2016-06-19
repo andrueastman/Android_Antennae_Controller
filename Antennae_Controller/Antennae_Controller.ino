@@ -16,6 +16,7 @@ void setup() {
 
   myStepper1.setSpeed(4);
   myStepper2.setSpeed(4);
+  Serial.begin(9600);   
 }
 
 void loop() {
@@ -26,4 +27,14 @@ void loop() {
   lcd.print(millis() / 1000);
   myStepper2.step(32);
   myStepper1.step(32);
+  if(Serial.available()){
+  /*while(Serial.available())
+    {
+      char inChar = (char)Serial.read(); //read the input
+      inputString += inChar;        //make a string of the characters coming on serial
+    }*/
+   // Serial.println(inputString);
+    Serial.println("HAHAHA");
+    //inputString = "";
+  }
 }

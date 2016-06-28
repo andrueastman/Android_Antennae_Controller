@@ -13,7 +13,7 @@ void setup() {
   lcd.begin(16, 2);
   // Print a message to the LCD.
   lcd.print("hello, world!");
-
+  //Set stepper speed
   myStepper1.setSpeed(4);
   myStepper2.setSpeed(4);
   Serial.begin(9600);   
@@ -25,16 +25,26 @@ void loop() {
   lcd.setCursor(0, 1);
   // print the number of seconds since reset:
   lcd.print(millis() / 1000);
-  myStepper2.step(32);
-  myStepper1.step(32);
+  
+  //myStepper2.step(32);
+  //myStepper1.step(32);
+  String inputString;
   if(Serial.available()){
-  /*while(Serial.available())
-    {
-      char inChar = (char)Serial.read(); //read the input
-      inputString += inChar;        //make a string of the characters coming on serial
-    }*/
-   // Serial.println(inputString);
-    Serial.println("HAHAHA");
-    //inputString = "";
+    while(Serial.available())
+      {
+        char inChar = (char)Serial.read(); //read the input
+        inputString += inChar;        //make a string of the characters coming on serial
+      }
+      lcd.print(inputString);
+      if(inputString.equals("12")){
+          myStepper1.step(32);
+          Serial.println("STEPPER 1");
+        }
+      else if(inputString.equals("34")){
+          myStepper2.step(32);
+          Serial.println("STEPPER 2");
+        }
+      //Serial.println("HAHAHA");
+      inputString = "";
   }
 }

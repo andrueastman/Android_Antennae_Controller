@@ -12,10 +12,10 @@ void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   // Print a message to the LCD.
-  lcd.print("hello, world!");
+  lcd.print("REMOTE ANTENNAE");
   //Set stepper speed
-  myStepper1.setSpeed(4);
-  myStepper2.setSpeed(4);
+  myStepper1.setSpeed(3);
+  myStepper2.setSpeed(3);
   Serial.begin(9600);   
 }
 
@@ -24,7 +24,7 @@ void loop() {
   // (note: line 1 is the second row, since counting begins with 0):
   lcd.setCursor(0, 1);
   // print the number of seconds since reset:
-  lcd.print(millis() / 1000);
+  //lcd.print(millis() / 1000);
   
   //myStepper2.step(32);
   //myStepper1.step(32);
@@ -35,13 +35,15 @@ void loop() {
         char inChar = (char)Serial.read(); //read the input
         inputString += inChar;        //make a string of the characters coming on serial
       }
-      lcd.print(inputString);
-      if(inputString.equals("12")){
-          myStepper1.step(32);
+      
+      if(inputString.equals("1")){
+          myStepper1.step(64);
+          lcd.print("STEPPER 1 MOVE");
           Serial.println("STEPPER 1");
         }
-      else if(inputString.equals("34")){
-          myStepper2.step(32);
+      else if(inputString.equals("3")){
+          myStepper2.step(64);
+          lcd.print("STEPPER 2 MOVE");
           Serial.println("STEPPER 2");
         }
       //Serial.println("HAHAHA");
